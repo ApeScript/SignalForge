@@ -1,7 +1,17 @@
 # Aggressive Strategy Config
+# This strategy is optimized for faster signal generation.
+# Lower thresholds = more signals = more aggressive trading behavior.
 
 pattern_rules:
-  whale_tokens: 10
-  dormant_threshold: 3
-  min_confidence: 0.6
-  buy_on_patterns: 1
+  
+  whale_tokens: 10           # Classify as Whale Wallet if token count >= 10
+                             # Lower value → Detect whales faster
+
+  dormant_threshold: 3       # Classify as Dormant Wallet if transactions <= 3
+                             # Lower value → Detect sleeping wallets quickly
+
+  min_confidence: 0.6        # Minimum confidence score required to trigger a BUY signal
+                             # Range: 0.0 (very loose) to 1.0 (very strict)
+
+  buy_on_patterns: 1         # Minimum number of detected patterns required for a BUY signal
+                             # Lower value → Easier to trigger BUY

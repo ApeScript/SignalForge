@@ -1,25 +1,34 @@
 # Base Config for SignalForge
+# This is the global configuration file.
+# Controls API endpoints, webhook settings, AI usage, and risk scoring logic.
 
-# API URLs
-coingecko_api: "https://api.coingecko.com/api/v3"
-rpc_url: "https://api.mainnet-beta.solana.com"
+# API URLs for external data sources
+coingecko_api: "https://api.coingecko.com/api/v3"         # Used to fetch token prices
+rpc_url: "https://api.mainnet-beta.solana.com"            # Blockchain RPC endpoint (Solana default)
 
-# Webhooks (optional)
+# Webhook Configuration (Optional)
+# All values are loaded from environment variables for security reasons.
 webhooks:
-  discord: "${DISCORD_WEBHOOK_URL}"
-  telegram_token: "${TELEGRAM_BOT_TOKEN}"
-  telegram_chat_id: "${TELEGRAM_CHAT_ID}"
-  custom: "${CUSTOM_WEBHOOK_URL}"
+  discord: "${DISCORD_WEBHOOK_URL}"                       # Discord webhook URL for signal alerts
+  telegram_token: "${TELEGRAM_BOT_TOKEN}"                 # Telegram bot token
+  telegram_chat_id: "${TELEGRAM_CHAT_ID}"                 # Telegram target chat/group ID
+  custom: "${CUSTOM_WEBHOOK_URL}"                         # Custom webhook URL for any other platform
 
-# AI
+# AI Configuration (Optional)
+# API key for OpenAI GPT models to enable human-readable signal comments.
 ai_api_key: "${OPENAI_API_KEY}"
 
 # Risk Scoring Weights
+# Defines how SignalForge calculates the risk score for any wallet.
+# You can adjust these values to make risk scoring more or less sensitive.
+
 risk_weights:
-  activity:
+  activity:                                               # Weighting based on wallet activity level
     Dormant Wallet: 1.0
     Low Activity: 2.0
     Moderate Activity: 3.0
     High Activity: 4.0
-  pattern: 1.5
-  whale_token_threshold: 20
+
+  pattern: 1.5                                            # Additional weight per pattern detected
+
+  whale_token_threshold: 20                               # Token holding threshold to classify a whale

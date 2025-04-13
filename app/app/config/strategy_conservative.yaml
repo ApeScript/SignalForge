@@ -1,7 +1,16 @@
 # Conservative Strategy Config
+# This strategy is designed for low-risk, conservative signal generation.
+# Requires stronger patterns and higher confidence before triggering a BUY signal.
 
 pattern_rules:
+  # Minimum number of tokens held to classify as a Whale Wallet
   whale_tokens: 25
+
+  # Maximum number of transactions to classify as Dormant Wallet
   dormant_threshold: 5
+
+  # Minimum required confidence score to allow a BUY signal (range: 0.0 - 1.0)
   min_confidence: 0.8
+
+  # Minimum number of detected patterns required to trigger a BUY signal
   buy_on_patterns: 2
