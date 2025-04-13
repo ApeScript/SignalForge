@@ -19,6 +19,7 @@ class WebhookSender:
         Args:
             config (dict): Configuration with webhook URLs.
         """
+        # Webhook URLs from config
         self.discord_url = config.get("webhooks", {}).get("discord")
         self.telegram_token = config.get("webhooks", {}).get("telegram_token")
         self.telegram_chat_id = config.get("webhooks", {}).get("telegram_chat_id")
@@ -26,28 +27,38 @@ class WebhookSender:
 
     def send_signal(self, signal: Dict[str, Any]) -> None:
         """
-        Send signal to all configured webhooks.
+        Send signal to all configured webhook endpoints.
 
         Args:
             signal (dict): Signal to send.
         """
+        # Send to Discord if URL provided
         if self.discord_url:
             self._send_discord(signal)
 
+        # Send to Telegram if token & chat_id provided
         if self.telegram_token and self.telegram_chat_id:
             self._send_telegram(signal)
 
+        # Send to custom endpoint if URL provided
         if self.custom_url:
             self._send_custom(signal)
 
     def _send_discord(self, signal: Dict[str, Any]) -> None:
         """
-        Send signal to Discord.
+        Send signal to Discord webhook.
 
         Args:
             signal (dict): Signal to send.
         """
-        content = f"New Signal: `{signal.get('signal')}`\nWallet: `{signal.get('wallet')}`\nReason: {signal.get('reason')}\nConfidence: {signal.get('confidence')}"
+        # Build message content for Discord
+        content = (
+            f"New Signal: `{signal.get('signal')}`\n"
+            f"Wallet: `{signal.get('wallet')}`\n"
+            f"Reason: {signal.get('reason')}\n"
+            f"Confidence: {signal.get('confidence')}"
+        )
+
         payload = {"content": content}
 
         try:
@@ -59,11 +70,12 @@ class WebhookSender:
 
     def _send_telegram(self, signal: Dict[str, Any]) -> None:
         """
-        Send signal to Telegram.
+        Send signal to Telegram chat.
 
         Args:
             signal (dict): Signal to send.
         """
+        # Build message content for Telegram
         content = (
             f"📈 *New Signal: {signal.get('signal')}*\n"
             f"Wallet: `{signal.get('wallet')}`\n"
@@ -72,6 +84,7 @@ class WebhookSender:
         )
 
         url = f"https://api.telegram.org/bot{self.telegram_token}/sendMessage"
+
         payload = {
             "chat_id": self.telegram_chat_id,
             "text": content,
@@ -87,7 +100,7 @@ class WebhookSender:
 
     def _send_custom(self, signal: Dict[str, Any]) -> None:
         """
-        Send signal to custom webhook.
+        Send signal to a custom webhook endpoint.
 
         Args:
             signal (dict): Signal to send.
