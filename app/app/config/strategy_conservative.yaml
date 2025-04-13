@@ -1,0 +1,7 @@
+# Conservative Strategy Config
+
+pattern_rules:
+  whale_tokens: 25
+  dormant_threshold: 5
+  min_confidence: 0.8
+  buy_on_patterns: 2

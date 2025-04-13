@@ -1,0 +1,7 @@
+# Aggressive Strategy Config
+
+pattern_rules:
+  whale_tokens: 10
+  dormant_threshold: 3
+  min_confidence: 0.6
+  buy_on_patterns: 1

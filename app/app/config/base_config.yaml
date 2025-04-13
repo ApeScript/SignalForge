@@ -1,0 +1,25 @@
+# Base Config for SignalForge
+
+# API URLs
+coingecko_api: "https://api.coingecko.com/api/v3"
+rpc_url: "https://api.mainnet-beta.solana.com"
+
+# Webhooks (optional)
+webhooks:
+  discord: "${DISCORD_WEBHOOK_URL}"
+  telegram_token: "${TELEGRAM_BOT_TOKEN}"
+  telegram_chat_id: "${TELEGRAM_CHAT_ID}"
+  custom: "${CUSTOM_WEBHOOK_URL}"
+
+# AI
+ai_api_key: "${OPENAI_API_KEY}"
+
+# Risk Scoring Weights
+risk_weights:
+  activity:
+    Dormant Wallet: 1.0
+    Low Activity: 2.0
+    Moderate Activity: 3.0
+    High Activity: 4.0
+  pattern: 1.5
+  whale_token_threshold: 20

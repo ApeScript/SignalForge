@@ -1,0 +1,14 @@
+services:
+  api:
+    build: .
+    container_name: signalforge-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./logs:/app/logs
+      - ./signals:/app/signals
+      - ./reports:/app/reports
+      - ./signalforge.db:/app/signalforge.db
+    env_file:
+      - .env
+    restart: always
