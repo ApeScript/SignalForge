@@ -6,8 +6,6 @@
 
 <p align="center">
 
-<img src="https://img.shields.io/github/license/ApeScript/SignalForge?style=flat-square" />
-<img src="https://img.shields.io/github/stars/ApeScript/SignalForge?style=flat-square" />
 <img src="https://img.shields.io/badge/python-3.11%2B-blue?style=flat-square" />
 <img src="https://img.shields.io/badge/built%20with-FastAPI-0ba360?style=flat-square" />
 
